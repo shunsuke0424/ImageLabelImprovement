@@ -33,12 +33,6 @@ def calculate_similarity(labels: list, image_url: str):
     texts = clip.tokenize(labels).to(device)
 
     # モデルを通じて特徴ベクトルを取得
-    # with torch.no_grad():
-    #     logits_per_image, _ = model(image, texts)
-    #     probs = logits_per_image.softmax(dim=-1).cpu().numpy()
-    # # ラベルとその確率を辞書に格納
-    # label_probs = {label: prob for label, prob in zip(labels, probs[0])}
-    # return label_probs
     with torch.no_grad():
         logits_per_image, _ = model(image, texts)
         scores = logits_per_image.cpu().numpy()
@@ -46,4 +40,3 @@ def calculate_similarity(labels: list, image_url: str):
     label_scores = {label: score for label, score in zip(labels, scores[0])}
 
     return label_scores
-
