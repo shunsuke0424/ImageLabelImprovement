@@ -3,7 +3,7 @@ from clip_distance import calculate_similarity
 from distance_data import similarity_cache
 
 
-def filter_labels(
+def enhance_label_discrimination(
     label_number_1: int, current_label1: list, label_number_2: int, current_label2: list
 ):
     # ラベルをインデックスで取得
