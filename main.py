@@ -1,6 +1,4 @@
 from zero_shot_classification import zero_shot_classification
-
-# from show import show
 from datasets.datasets import image_urls, labels
 import random
 from enhance_label_discrimination import enhance_label_discrimination
@@ -12,7 +10,7 @@ logger = setup_logger("main")
 
 def main():
     # 単語数の宣言
-    word_count = 9
+    word_count = 8
     # 初回のラベル選択
     current_labels = [
         [word.strip() for word in random.sample(label.split(","), word_count)]
