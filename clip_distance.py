@@ -4,6 +4,7 @@ from PIL import Image
 import requests
 from io import BytesIO
 from torchvision.transforms import Compose, Resize, CenterCrop, ToTensor, Normalize
+from datasets.datasets import image_urls, labels
 
 
 def calculate_similarity(labels: list, image_url: str):

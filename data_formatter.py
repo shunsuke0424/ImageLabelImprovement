@@ -12,7 +12,6 @@ def format_for_evaluation(results):
 
 
 def format_for_visualization(results):
-    print(results)
     # labels = list(set([result["label"] for result in results]))
     labels = list(
         OrderedDict.fromkeys(
@@ -20,7 +19,6 @@ def format_for_visualization(results):
         )
     )
     formatted_results = []
-    print(labels)
     for label in labels:
         label_results = {"label": label}
         label_results.update(
