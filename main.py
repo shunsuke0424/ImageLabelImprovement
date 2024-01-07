@@ -12,7 +12,9 @@ logger = setup_logger("main")
 
 def main():
     # 特徴量数の宣言
-    word_count = 3
+    word_count = 6
+    # F1スコアとラベルの組み合わせを保存する辞書を初期化
+    f1_scores_labels_dict = {}
     avg_f1_scores_history = []
     # 改善したラベルの番号を保存するリストを初期化
     improved_labels_history = []
@@ -23,11 +25,10 @@ def main():
         else [word.strip() for word in label.split(",")]
         for label in labels
     ]
-    counter = 0
     # 現在の日時を取得
     now = datetime.now()
-    while counter < 100:
-        logger.info(f"{counter}周目経過時のラベル群:{current_labels}")
+    for i in range(100):
+        logger.info(f"{i+1}周目経過時のラベル群:{current_labels}")
         result_data = zero_shot_classification(image_urls, current_labels)
         # evaluate関数に結果を渡し、f値と改善すべきラベルを取得
         f1_scores = calculate_f1_scores(result_data)
@@ -36,10 +37,11 @@ def main():
         # 平均F1スコアをリストに追加
         avg_f1_scores_history.append(avg_f1_score)
         logger.warning("平均F1スコア: %s", avg_f1_score)
-
-        # 平均F1スコアが基準を超えたらループを抜ける
-        if avg_f1_score > 0.7:
-            break
+        # 平均F1スコアとラベルの組み合わせ、そしてzero_shot_classificationの結果を辞書に追加
+        f1_scores_labels_dict[avg_f1_score] = {
+            "labels": current_labels,
+            "result_data": result_data,
+        }
 
         (
             low_performance_label_1,
@@ -138,8 +140,13 @@ def main():
                 "%s\n"
                 % str((low_performance_label_number_1, low_performance_label_number_2))
             )
-        counter += 1
-    logger.info(f"最終的なラベル群:{current_labels}")
+    # 最高のF1スコアを持つラベル群と結果データを取得
+    best_f1_score = max(f1_scores_labels_dict.keys())
+    best_labels = f1_scores_labels_dict[best_f1_score]["labels"]
+    best_result_data = f1_scores_labels_dict[best_f1_score]["result_data"]
+    logger.info(
+        f"F1スコア最高値:{best_f1_score}\n最終的なラベル群:{best_labels}\n最終的な結果データ:{best_result_data}"
+    )
 
 
 if __name__ == "__main__":

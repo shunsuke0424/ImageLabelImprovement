@@ -52,6 +52,8 @@ def find_low_performance_labels(zeroshot_result_data):
     highest_incorrect_score_label = max(
         incorrect_ratios, key=lambda x: incorrect_ratios[x]["highest_incorrect_score"]
     )
+    print(incorrect_ratios)
+    # ここランダム性を持たせても面白そう、のデバッグ
 
     # そのスコアの本当の正解ラベルを見つける
     correct_label_for_highest_incorrect_score = incorrect_ratios[
