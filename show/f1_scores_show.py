@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # ファイルからデータを読み込む
-with open("f1_scores_history.txt", "r") as f:
+with open("f1_scores_history_20240107_011838.txt", "r") as f:
     data = [list(map(float, line.strip().strip("[]").split(", "))) for line in f]
 
 # データを転置

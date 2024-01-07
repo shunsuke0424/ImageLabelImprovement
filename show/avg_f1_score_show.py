@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Load data from the file
-with open("avg_f1_scores_history.txt", "r") as f:
+with open("result_data/f1_scores_history/20240107_092031.txt", "r") as f:
     data = [float(line.strip()) for line in f]
 
 # Plot the data

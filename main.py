@@ -11,8 +11,8 @@ logger = setup_logger("main")
 
 
 def main():
-    # 単語数の宣言
-    word_count = 9
+    # 特徴量数の宣言
+    word_count = 3
     avg_f1_scores_history = []
     # 改善したラベルの番号を保存するリストを初期化
     improved_labels_history = []
@@ -120,9 +120,11 @@ def main():
         timestamp_str = now.strftime("%Y%m%d_%H%M%S")
 
         # ファイル名にタイムスタンプを追加
-        f1_scores_file = f"f1_scores_history_{timestamp_str}.txt"
-        avg_f1_scores_file = f"avg_f1_scores_history_{timestamp_str}.txt"
-        improved_labels_file = f"improved_labels_history_{timestamp_str}.txt"
+        f1_scores_file = f"result_data/f1_scores_history/{timestamp_str}.txt"
+        avg_f1_scores_file = f"result_data/avg_f1_scores_history/{timestamp_str}.txt"
+        improved_labels_file = (
+            f"result_data/improved_labels_history/{timestamp_str}.txt"
+        )
 
         # F1スコアの推移を保存
         with open(f1_scores_file, "a") as f:
@@ -142,117 +144,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-[
-    [
-        "Wainscoting on lower walls",
-        "Matching wood-framed pictures",
-        "Patterned drapery",
-        "Bathroom mirror with wood frame",
-        "Wood-paneled doors",
-        "Beige upholstered bench",
-        "Dark wood furniture",
-        "High baseboards",
-        "Wood trim around windows",
-    ],
-    [
-        "Chandelier with candle-style lights",
-        "Bedside lamps with bell shades",
-        "High-backed wooden chair",
-        "French doors leading to balcony",
-        "Wall-mounted light fixtures",
-        "Arched doorways",
-        "Outdoor lantern-style light fixture",
-        "Exposed wooden beams",
-        "Plush white carpet",
-    ],
-    [
-        "Assorted decorative objects on dresser",
-        "Ceramic canisters on counter",
-        "Wood and metal staircase railing",
-        "Kitchen sink with gooseneck faucet",
-        "Abstract sculpture on kitchen counter",
-        "White baseboards",
-        "Distressed wood mirror frame",
-        "Recessed lighting",
-        "White trim and molding",
-    ],
-    [
-        "Carved wood details on furniture",
-        "Warm-toned wood finishes",
-        "Decorative throw pillow",
-        "Wrought iron bed frame",
-        "Beaded table lamp",
-        "White ceiling",
-        "Traditional room decor",
-        "Dark wood baseboards",
-        "Framed floral artwork",
-    ],
-    [
-        "Intricate carpet design",
-        "Ceiling medallion",
-        "Ornate picture frames",
-        "Brass light switch plate",
-        "Light blue tea set",
-        "Antique wooden chair",
-        "Decorative throw on the chair",
-        "White ceiling",
-        "Lace curtains",
-    ],
-    [
-        "Striped wallpaper",
-        "Minimalist decor style",
-        "Neatly arranged bed",
-        "Dark metal bed frame",
-        "Paneled walls",
-        "Beige wall paint above paneling",
-        "Gray upholstered bed frame",
-        "Decorative ceiling medallion",
-        "Beige carpet in other room",
-    ],
-    [
-        "Sheer window shades",
-        "Purple bedspread",
-        "Downlights in kitchen area",
-        "Open shelving in the kitchen",
-        "Stacked books on the kitchen counter",
-        "Black ceiling fan",
-        "Large window panes",
-        "Multi-level living spaces",
-        "Lush greenery outside the window",
-    ],
-    [
-        "White radiator heater",
-        "Flush mounted ceiling lights",
-        "Natural light from window",
-        "Neutral-toned bedding",
-        "Minimalistic design",
-        "White walls",
-        "White ceiling",
-        "Abstract graffiti wall art",
-        "Recessed wall nooks",
-    ],
-    [
-        "Patterned wallpaper accent wall",
-        "Blended interior decor",
-        "Black venetian blinds",
-        "Minimalistic furniture design",
-        "Architectural room features",
-        "Sleek wardrobe handles",
-        "Beige throw pillow",
-        "Neutral room tones",
-        "Natural light from window",
-    ],
-    [
-        "Shadow play on walls",
-        "Dark wood door",
-        "Step leading down to bed area",
-        "Neutral color palette",
-        "Contemporary art",
-        "Open space concept",
-        "Discreet wall outlets",
-        "White bedding",
-        "elegant furniture style",
-    ],
-]
