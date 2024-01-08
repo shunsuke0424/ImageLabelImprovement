@@ -12,7 +12,7 @@ logger = setup_logger("main")
 
 def main():
     # 特徴量数の宣言
-    word_count = 6
+    word_count = 3
     # F1スコアとラベルの組み合わせを保存する辞書を初期化
     f1_scores_labels_dict = {}
     avg_f1_scores_history = []

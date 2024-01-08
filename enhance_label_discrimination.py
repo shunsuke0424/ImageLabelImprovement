@@ -55,6 +55,11 @@ def enhance_label_discrimination(
     label_candidates = [
         label for label in label1_image2_probs if label in current_label1
     ]
+    label_candidates = [
+        label
+        for label in label1_image2_probs
+        if label in current_label1 and label != min_current_label1_image1
+    ]
     similarities = [label1_image2_probs[label] for label in label_candidates]
     probabilities = np.exp(similarities) / np.sum(
         np.exp(similarities)
@@ -66,8 +71,7 @@ def enhance_label_discrimination(
     new_label1.remove(min_current_label1_image1)
     new_label1.append(max_label1_image1)
     new_label1.append(min_label1_image2)
-    if max_current_label1_image2 in new_label1:
-        new_label1.remove(max_current_label1_image2)
+    new_label1.remove(max_current_label1_image2)
 
     # label2に関しても同様の処理
     # cur_label2 vs img2
@@ -110,7 +114,9 @@ def enhance_label_discrimination(
 
     # cur_label2 vs img1
     label_candidates = [
-        label for label in label2_image1_probs if label in current_label2
+        label
+        for label in label2_image1_probs
+        if label in current_label2 and label != min_current_label2_image2
     ]
     similarities = [label2_image1_probs[label] for label in label_candidates]
     probabilities = np.exp(similarities) / np.sum(
@@ -123,8 +129,7 @@ def enhance_label_discrimination(
     new_label2.remove(min_current_label2_image2)
     new_label2.append(max_label2_image2)
     new_label2.append(min_label2_image1)
-    if max_current_label2_image1 in new_label2:
-        new_label2.remove(max_current_label2_image1)
+    new_label2.remove(max_current_label2_image1)
 
     # 重複を削除
     new_label1 = list(set(new_label1))
