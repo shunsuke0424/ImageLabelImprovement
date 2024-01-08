@@ -1,12 +1,6 @@
 from data_formatter import format_for_evaluation, format_for_visualization
 
 
-# 以下はデータを事前に加工するか否かのコード
-# 今の所そのまま直のデータを扱う方針
-# for key in data.keys():
-#     data[key] = {k: v * 1000 for k, v in data[key].items()}
-# for key in data.keys():
-#     data[key] = {k: int(v) for k, v in data[key].items()}
 def calculate_f1_scores(zeroshot_result_data):
     data = format_for_evaluation(zeroshot_result_data)
     f1_scores = []
@@ -63,3 +57,40 @@ def find_low_performance_labels(zeroshot_result_data):
     return highest_incorrect_score_label.split(
         ", "
     ), correct_label_for_highest_incorrect_score.split(", ")
+
+
+def find_low_performance_labels_by_F1_score(zeroshot_result_data, f1_scores):
+    # F1スコアが最も低いラベルのインデックスを取得
+    min_f1_index = f1_scores.index(min(f1_scores))
+    # F1スコアが最も低いラベルを取得するために、ラベルのリストが必要
+    labels = list(
+        format_for_evaluation(zeroshot_result_data)[
+            list(format_for_evaluation(zeroshot_result_data).keys())[0]
+        ].keys()
+    )
+    # 最も低いF1スコアのラベルを取得
+    lowest_f1_label = labels[min_f1_index]
+
+    # そのラベルの正解画像以外の画像のスコアで一番高い画像を見つける
+    data = format_for_visualization(zeroshot_result_data)
+    incorrect_scores = {}
+    for item in data:
+        if item["label"] == lowest_f1_label:
+            for key, value in item.items():
+                if key.endswith("_score") and key != f"image{min_f1_index+1}_score":
+                    incorrect_scores[key] = value
+            break
+    highest_incorrect_image_key = max(incorrect_scores, key=incorrect_scores.get)
+    highest_incorrect_image_index = (
+        int(highest_incorrect_image_key.replace("image", "").replace("_score", "")) - 1
+    )
+
+    # その画像に対応する真の正解ラベルを見つける
+    correct_label_for_highest_incorrect_image = data[highest_incorrect_image_index][
+        "label"
+    ]
+
+    # 最終的に一番F1スコアが低いラベルと真の正解ラベルを返却する
+    return lowest_f1_label.split(", "), correct_label_for_highest_incorrect_image.split(
+        ", "
+    )

@@ -2,7 +2,11 @@ from zero_shot_classification import zero_shot_classification
 from datasets.datasets import image_urls, labels
 import random
 from enhance_label_discrimination import enhance_label_discrimination
-from evaluate import calculate_f1_scores, find_low_performance_labels
+from evaluate import (
+    calculate_f1_scores,
+    find_low_performance_labels,
+    find_low_performance_labels_by_F1_score,
+)
 from logger import setup_logger
 from datetime import datetime
 
@@ -46,7 +50,7 @@ def main():
         (
             low_performance_label_1,
             low_performance_label_2,
-        ) = find_low_performance_labels(result_data)
+        ) = find_low_performance_labels_by_F1_score(result_data, f1_scores)
 
         low_performance_label_number_1 = (
             current_labels.index(low_performance_label_1) + 1
