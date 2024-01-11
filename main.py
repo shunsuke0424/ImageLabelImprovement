@@ -16,7 +16,7 @@ logger = setup_logger("main")
 
 def main():
     # 特徴量数の宣言
-    word_count = 3
+    word_count = 7
     # F1スコアとラベルの組み合わせを保存する辞書を初期化
     f1_scores_labels_dict = {}
     avg_f1_scores_history = []
@@ -46,11 +46,10 @@ def main():
             "labels": current_labels,
             "result_data": result_data,
         }
-
         (
             low_performance_label_1,
             low_performance_label_2,
-        ) = find_low_performance_labels_by_F1_score(result_data, f1_scores)
+        ) = find_low_performance_labels(result_data)
 
         low_performance_label_number_1 = (
             current_labels.index(low_performance_label_1) + 1
