@@ -27,7 +27,11 @@ def enhance_label_discrimination(
 
     # 3.0 all_label1とimage2の一番遠いやつ見つける.all_label1 vs img2
     min_label1_image2 = all_label1_vs_img2(
-        current_label1, all_label1_list, label1_image1_probs, label1_image2_probs
+        current_label1,
+        all_label1_list,
+        label1_image1_probs,
+        label1_image2_probs,
+        max_label1_image1,
     )
 
     # 4.0すでにあるももの一番近いやつを見つける.cur_label1 vs img2
@@ -58,7 +62,11 @@ def enhance_label_discrimination(
 
     # 3.0 all_label2とimage1の一番遠いやつ見つける.all_label2 vs img1
     min_label2_image1 = all_label2_vs_img1(
-        current_label2, all_label2_list, label2_image2_probs, label2_image1_probs
+        current_label2,
+        all_label2_list,
+        label2_image2_probs,
+        label2_image1_probs,
+        max_label2_image2,
     )
 
     # 4.0すでにあるももの一番近いやつを見つける.cur_label2 vs img1
@@ -138,15 +146,24 @@ def cur_label1_vs_img2(
     probabilities = np.exp(inverse_differences)
     probabilities /= probabilities.sum()
     # 確率分布に基づいてラベルを選択
-    max_current_label1_image2 = np.random.choice([label for label in current_label1 if label != min_current_label1_image1], p=probabilities)
+    max_current_label1_image2 = np.random.choice(
+        [label for label in current_label1 if label != min_current_label1_image1],
+        p=probabilities,
+    )
     return max_current_label1_image2
 
 
 def all_label1_vs_img2(
-    current_label1, all_label1_list, label1_image1_probs, label1_image2_probs
+    current_label1,
+    all_label1_list,
+    label1_image1_probs,
+    label1_image2_probs,
+    max_label1_image1,
 ):
     label1_candidates = [
-        label for label in all_label1_list if label not in current_label1
+        label
+        for label in all_label1_list
+        if label not in current_label1 and label != max_label1_image1
     ]
     # current_label1に含まれるラベルの類似度を抽出
     current_label1_image2_probs = {
@@ -217,10 +234,16 @@ def all_label2_vs_img2(label_number_2, current_label2, label2_image2_probs):
 
 
 def all_label2_vs_img1(
-    current_label2, all_label2_list, label2_image2_probs, label2_image1_probs
+    current_label2,
+    all_label2_list,
+    label2_image2_probs,
+    label2_image1_probs,
+    max_label2_image2,
 ):
     label2_candidates = [
-        label for label in all_label2_list if label not in current_label2
+        label
+        for label in all_label2_list
+        if label not in current_label2 and label != max_label2_image2
     ]
     # current_label2に含まれるラベルの類似度を抽出
     current_label2_image2_probs = {
