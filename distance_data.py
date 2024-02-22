@@ -515,7 +515,6 @@ similarity_cache = [
         "Ornate rug hanging on the wall": 16.50441,
         "Discreet wall outlets": 21.771519,
         "Uniform ceiling height": 25.36771,
-        "Simple": 18.386353,
         "elegant furniture style": 23.12576,
         "Warm wooden floor tones": 22.630932,
         "High-end": 21.933857,

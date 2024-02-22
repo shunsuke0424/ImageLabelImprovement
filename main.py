@@ -5,7 +5,6 @@ from enhance_label_discrimination import enhance_label_discrimination
 from evaluate import (
     calculate_f1_scores,
     find_low_performance_labels,
-    find_low_performance_labels_by_F1_score,
 )
 from logger import setup_logger
 from datetime import datetime
@@ -16,7 +15,7 @@ logger = setup_logger("main")
 
 def main():
     # 特徴量数の宣言
-    word_count = 7
+    word_count = 3
     # F1スコアとラベルの組み合わせを保存する辞書を初期化
     f1_scores_labels_dict = {}
     avg_f1_scores_history = []
@@ -24,9 +23,11 @@ def main():
     improved_labels_history = []
     # 初回のラベル選択
     current_labels = [
-        [word.strip() for word in random.sample(label.split(","), word_count)]
-        if len(label.split(",")) >= word_count
-        else [word.strip() for word in label.split(",")]
+        (
+            [word.strip() for word in random.sample(label.split(","), word_count)]
+            if len(label.split(",")) >= word_count
+            else [word.strip() for word in label.split(",")]
+        )
         for label in labels
     ]
     # 現在の日時を取得

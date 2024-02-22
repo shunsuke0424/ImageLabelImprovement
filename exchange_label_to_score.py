@@ -2,90 +2,30 @@ from distance_data import similarity_cache
 
 # ラベル群
 data1 = [
+    ["White orchids", "Geometric picture frames", "Square ceiling vent"],
     [
-        "Decorative ceramic vases",
-        "High baseboards",
-        "Beige upholstered bench",
-        "Cable railing on staircase",
-        "Light switch plates",
-        "Matching wood-framed pictures",
-        "Coordinated picture frames",
-    ],
-    [
-        "Exposed wooden beams",
-        "Wrought iron bed frame",
-        "Fire burning in fireplace",
-        "Vaulted ceilings",
-        "Classical painting in gilded frame",
+        "Wall sconces with dome shades",
         "Outdoor lantern-style light fixture",
+        "French doors leading to balcony",
     ],
+    ["Indoor potted plants", "Light granite countertops", "Mounted wall mirrors"],
+    ["Sheer curtain under drapery", "Intricate area rug", "Wrought iron chandelier"],
+    ["Patterned carpet", "Lace curtains", "Delicate porcelain figurines"],
+    ["Built-in bookshelves in other room", "Paneled walls", "Hardwood floors"],
+    ["Purple flooring in bedroom area", "A-frame ceiling", "Exposed dark beams"],
+    ["Recessed wall nooks", "Orange-red color accents", "Abstract graffiti wall art"],
     [
-        "Striped upholstered bench",
-        "Decorative straw hats on wall",
-        "Mounted wall mirrors",
-        "French doors with transom windows",
-        "Gray wall paint",
-        "Under-cabinet lighting",
-        "Indoor potted plants",
-    ],
-    [
-        "Textured ceiling finish",
-        "Floral bed linens",
-        "Framed floral artwork",
-        "Intricate area rug",
-        "Patterned curtains",
-    ],
-    [
-        "Sheer window drapery",
-        "Decorative bed pillows",
-        "Vintage telephone",
-        "Intricate carpet design",
-        "Traditional room decor",
-        "Porcelain table lamps",
-        "White baseboards",
-    ],
-    [
-        "Minimalist decor style",
-        "Symmetrical wall design",
-        "White bedding",
-        "Dark wood trim",
-        "Warm ambient light",
-        "Spacious room layout",
-        "Glass in pendant lights",
-    ],
-    [
-        "Wall-mounted air vents",
-        "Multi-level living spaces",
-        "Exposed dark beams",
-        "Elevated bedroom area",
-        "Frameless circular wall mirror",
-        "Lush greenery outside the window",
-    ],
-    [
-        "High ceilings",
-        "Compact living space",
-        "Flush mounted ceiling lights",
-        "Orange-red color accents",
-        "Recessed wall nooks",
-        "White door frames",
-        "Accent lighting in art niche",
-    ],
-    [
-        "Hardwood flooring",
-        "Fluffy white area rug",
-        "Blended interior decor",
-        "Architectural room features",
-        "Cozy room atmosphere",
         "Patterned wallpaper accent wall",
+        "Single bed with brown cover",
+        "Concrete step decorations",
     ],
     [
-        "Floor to ceiling windows",
-        "Light filtering through windows",
-        "HVAC vent on the floor",
-        "Recessed lighting",
+        "Nightstands with drawers",
         "Sliding door to balcony",
+        "Light filtering through windows",
     ],
 ]
+
 data2 = [
     [
         "Beige carpet runner",
@@ -197,7 +137,7 @@ data2 = [
 # ラベル群を類似度に置き換える
 similarity_scores = []
 avg_similarity_scores = []
-for label_group in data2:
+for label_group in data1:
     group_scores = []
     # ラベル群をカンマで区切って要素に分ける
     for label in label_group:
